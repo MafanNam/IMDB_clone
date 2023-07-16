@@ -5,4 +5,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('api/', include('movie.api.urls')),
+
+    path('api-auth', include('rest_framework.urls')),
 ]
