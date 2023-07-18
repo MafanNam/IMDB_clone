@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, ScopedRateThrottle
 
+from .pagination import WatchListPagination, WatchListLOPagination, WatchListCPagination
 from .permissions import AdminOrReadOnly, ReviewUserOrReadOnly
 from movie.models import WatchList, StreamPlatform, Review
 from .serializers import WatchListSerializer, StreamPlatformSerializer, ReviewSerializer
@@ -174,8 +175,9 @@ class WatchListGV(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
     # throttle_classes = [ReviewListThrottle, AnonRateThrottle]
-    filter_backends = [filters.OrderingFilter]
-    ordering_fields = ['avg_rating']
+    # filter_backends = [filters.OrderingFilter]
+    # ordering_fields = ['avg_rating']
+    pagination_class = [WatchListCPagination]
 
 
 class WatchListAV(APIView):
