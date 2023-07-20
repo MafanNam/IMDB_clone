@@ -5,7 +5,7 @@ from movie.api import views
 
 
 router = DefaultRouter()
-router.register('stream', views.StreamPlatformVS, basename='stream-platform')
+router.register('stream', views.StreamPlatformVS, basename='streamplatform')
 
 urlpatterns = [
     path('list/', views.WatchListAV.as_view(), name='movie-list'),
