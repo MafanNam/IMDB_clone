@@ -106,25 +106,6 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     throttle_scope = 'review-detail'
 
 
-# class ReviewDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
-#     queryset = Review.objects.all()
-#     serializer_class = ReviewSerializer
-#
-#     def get(self, request, *args, **kwargs):
-#         return self.retrieve(request, *args, **kwargs)
-#
-#
-# class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
-#     queryset = Review.objects.all()
-#     serializer_class = ReviewSerializer
-#
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
-#
-#     def post(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
-
-
 class StreamPlatformAV(APIView):
     permission_classes = [AdminOrReadOnly]
 
@@ -222,42 +203,3 @@ class WatchDetailAV(APIView):
         movie = WatchList.objects.get(pk=pk)
         movie.delete()
         return Response({'message': 'was delete'}, status=status.HTTP_204_NO_CONTENT)
-
-# @api_view(['GET', 'POST'])
-# def movie_list(request):
-#     if request.method == 'GET':
-#         movies = Movie.objects.all()
-#         serializer = MovieSerializer(movies, many=True)
-#         return Response(serializer.data)
-#
-#     if request.method == 'POST':
-#         serializer = MovieSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         else:
-#             return Response(serializer.errors)
-#
-#
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def movie_details(request, pk):
-#     try:
-#         movie = Movie.objects.get(pk=pk)
-#     except Movie.DoesNotExist:
-#         return Response({'Error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
-#
-#     if request.method == 'GET':
-#         serializer = MovieSerializer(movie, many=False)
-#         return Response(serializer.data)
-#
-#     if request.method == 'PUT':
-#         serializer = MovieSerializer(movie, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#     if request.method == 'DELETE':
-#         movie.delete()
-#         return Response({'message': 'was delete'}, status=status.HTTP_204_NO_CONTENT)
